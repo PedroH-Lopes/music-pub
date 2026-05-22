@@ -13,6 +13,14 @@ target/
 .springBeans
 .sts4-cache
 
+### Enviroment Variables ###
+.env
+.env.local
+.env.*.local
+
+### Resources ###
+**/src/main/resources/artist-profiles-examples.json
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
