@@ -2,6 +2,21 @@ package com.pedrohlopes.musicPub.repository;
 
 import com.pedrohlopes.musicPub.model.user.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 public interface IUserRepository extends JpaRepository<UserEntity, Integer> {
+
+    @Query(
+            value = """
+                    SELECT EXISTS (
+                        SELECT 1
+                        FROM users u
+                        WHERE u.email = :email
+                    )
+                    """,
+            nativeQuery = true
+    )
+    boolean existsByEmail(@Param("email")  String email);
+
 }
