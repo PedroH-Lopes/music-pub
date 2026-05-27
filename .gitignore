@@ -20,6 +20,8 @@ target/
 
 ### Resources ###
 **/src/main/resources/artist-profiles-examples.json
+**/src/main/resources/establishment-profiles-examples.json
+**/src/main/resources/Contexto do Projeto.txt
 
 ### IntelliJ IDEA ###
 .idea
