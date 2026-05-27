@@ -14,10 +14,16 @@ spring:
     username: ${DB_POSTGRES_USERNAME}
     password: ${DB_POSTGRES_PASSWORD}
 
+  # Force SQL Initialization
+  sql:
+    init:
+      mode: always
+
   # JPA/HIBERNATE Configuration
   jpa:
     hibernate:
       ddl-auto: create-drop
+    defer-datasource-initialization: true
     show-sql: true
     properties:
       hibernate:

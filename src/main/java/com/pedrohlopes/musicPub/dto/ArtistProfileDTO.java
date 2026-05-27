@@ -2,6 +2,9 @@ package com.pedrohlopes.musicPub.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+import java.util.Set;
 
 public record ArtistProfileDTO(
 
@@ -23,5 +26,8 @@ public record ArtistProfileDTO(
         @NotBlank(message = "Campo cidade não preenchido")
         String city,
 
-        String instagram
+        String instagram,
+
+        @NotNull(message = "Selecione ao menos 1 estilo de musica")
+        Set<Long> musicalStylesIds
 ) {}
