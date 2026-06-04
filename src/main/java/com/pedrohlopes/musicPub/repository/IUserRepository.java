@@ -4,6 +4,9 @@ import com.pedrohlopes.musicPub.model.user.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Optional;
 
 public interface IUserRepository extends JpaRepository<UserEntity, Long> {
 
@@ -19,4 +22,5 @@ public interface IUserRepository extends JpaRepository<UserEntity, Long> {
     )
     boolean existsByEmail(@Param("email")  String email);
 
+    Optional<UserEntity> findByEmail(String username);
 }

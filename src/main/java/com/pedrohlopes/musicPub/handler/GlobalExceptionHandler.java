@@ -1,6 +1,7 @@
 package com.pedrohlopes.musicPub.handler;
 
 import com.pedrohlopes.musicPub.exception.BusinessException;
+import com.pedrohlopes.musicPub.exception.BadRequestException;
 import com.pedrohlopes.musicPub.exception.ErrorResponse;
 import com.pedrohlopes.musicPub.exception.FieldErrorResponse;
 import com.pedrohlopes.musicPub.exception.ValidationErrorResponse;
@@ -41,7 +42,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BusinessException.class)
     public ResponseEntity<ErrorResponse> handleBusinessException(BusinessException ex) {
         ErrorResponse response = new ErrorResponse(ex.getMessage(), 409);
-
         return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+    }
+
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<ErrorResponse> handleBadRequestException(BadRequestException ex) {
+        ErrorResponse response = new ErrorResponse(ex.getMessage(), 400);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 }
