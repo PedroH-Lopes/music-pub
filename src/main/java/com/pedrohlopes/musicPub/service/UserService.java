@@ -3,6 +3,7 @@ package com.pedrohlopes.musicPub.service;
 import com.pedrohlopes.musicPub.enums.Roles;
 import com.pedrohlopes.musicPub.exception.BusinessException;
 import com.pedrohlopes.musicPub.model.RolesEntity;
+import com.pedrohlopes.musicPub.model.artist.ArtistProfileEntity;
 import com.pedrohlopes.musicPub.model.user.UserEntity;
 import com.pedrohlopes.musicPub.repository.IRolesRepository;
 import com.pedrohlopes.musicPub.repository.IUserRepository;
@@ -41,5 +42,13 @@ public class UserService {
         if (userRepository.existsByEmail(email)) {
             throw new BusinessException("Email já cadastrado");
         }
+    }
+
+    public void deleteUser(ArtistProfileEntity artistProfileEntity) {
+        userRepository.delete(artistProfileEntity.getUser());
+    }
+
+    public void updateUser(ArtistProfileEntity artistProfileEntity) {
+        userRepository.save(artistProfileEntity.getUser());
     }
 }

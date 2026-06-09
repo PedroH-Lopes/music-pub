@@ -1,4 +1,4 @@
-package com.pedrohlopes.musicPub.dto;
+package com.pedrohlopes.musicPub.dto.artist;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

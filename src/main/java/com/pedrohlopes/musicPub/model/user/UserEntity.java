@@ -2,6 +2,7 @@ package com.pedrohlopes.musicPub.model.user;
 
 import com.pedrohlopes.musicPub.enums.Roles;
 import com.pedrohlopes.musicPub.model.RolesEntity;
+import com.pedrohlopes.musicPub.model.artist.ArtistProfileEntity;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
@@ -34,6 +35,11 @@ public class UserEntity implements UserDetails {
 
     @Column(nullable = false)
     private String password;
+
+    @OneToOne(mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private ArtistProfileEntity artistProfile;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles",

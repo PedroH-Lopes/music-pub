@@ -1,10 +1,6 @@
 package com.pedrohlopes.musicPub.handler;
 
-import com.pedrohlopes.musicPub.exception.BusinessException;
-import com.pedrohlopes.musicPub.exception.BadRequestException;
-import com.pedrohlopes.musicPub.exception.ErrorResponse;
-import com.pedrohlopes.musicPub.exception.FieldErrorResponse;
-import com.pedrohlopes.musicPub.exception.ValidationErrorResponse;
+import com.pedrohlopes.musicPub.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -49,5 +45,11 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleBadRequestException(BadRequestException ex) {
         ErrorResponse response = new ErrorResponse(ex.getMessage(), 400);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleResourceNotFoundException(ResourceNotFoundException ex) {
+        ErrorResponse response = new ErrorResponse(ex.getMessage(), 404);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
     }
 }
