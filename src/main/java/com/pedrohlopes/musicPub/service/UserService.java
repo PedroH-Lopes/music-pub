@@ -4,6 +4,7 @@ import com.pedrohlopes.musicPub.enums.Roles;
 import com.pedrohlopes.musicPub.exception.BusinessException;
 import com.pedrohlopes.musicPub.model.RolesEntity;
 import com.pedrohlopes.musicPub.model.artist.ArtistProfileEntity;
+import com.pedrohlopes.musicPub.model.establishment.EstablishmentProfileEntity;
 import com.pedrohlopes.musicPub.model.user.UserEntity;
 import com.pedrohlopes.musicPub.repository.IRolesRepository;
 import com.pedrohlopes.musicPub.repository.IUserRepository;
@@ -44,8 +45,12 @@ public class UserService {
         }
     }
 
-    public void deleteUser(ArtistProfileEntity artistProfileEntity) {
+    public void deleteUserArtist(ArtistProfileEntity artistProfileEntity) {
         userRepository.delete(artistProfileEntity.getUser());
+    }
+
+    public void deleteUserEstablishment(EstablishmentProfileEntity establishmentProfileEntity) {
+        userRepository.delete(establishmentProfileEntity.getUser());
     }
 
     public void updateUser(ArtistProfileEntity artistProfileEntity) {

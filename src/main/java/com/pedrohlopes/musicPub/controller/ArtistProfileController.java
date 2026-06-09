@@ -33,7 +33,7 @@ public class ArtistProfileController {
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void updateArtistById(@PathVariable Long id, @RequestBody ArtistProfileUpdateDTO artistProfileUpdateDTO){
-        artistProfileService.updateArtist(id, artistProfileUpdateDTO);
+        artistProfileService.updateArtistById(id, artistProfileUpdateDTO);
     }
 
     @DeleteMapping("/{id}")

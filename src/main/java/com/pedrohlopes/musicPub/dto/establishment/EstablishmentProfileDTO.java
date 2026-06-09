@@ -1,4 +1,4 @@
-package com.pedrohlopes.musicPub.dto;
+package com.pedrohlopes.musicPub.dto.establishment;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -28,5 +28,7 @@ public record EstablishmentProfileDTO(
         String city,
 
         @NotBlank(message = "Campo telefone não preenchido")
-        String contactPhone
+        String contactPhone,
+
+        String socialMedia
 ) {}

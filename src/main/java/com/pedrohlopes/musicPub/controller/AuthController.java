@@ -1,10 +1,12 @@
 package com.pedrohlopes.musicPub.controller;
 
-import com.pedrohlopes.musicPub.dto.ArtistProfileDTO;
+import com.pedrohlopes.musicPub.dto.artist.ArtistProfileDTO;
 import com.pedrohlopes.musicPub.dto.LoginProfileDTO;
 import com.pedrohlopes.musicPub.dto.TokenResponseDTO;
+import com.pedrohlopes.musicPub.dto.establishment.EstablishmentProfileDTO;
 import com.pedrohlopes.musicPub.service.ArtistProfileService;
 import com.pedrohlopes.musicPub.service.AuthService;
+import com.pedrohlopes.musicPub.service.EstablishmentProfileService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AuthController {
 
+
     private final ArtistProfileService artistProfileService;
+    private final EstablishmentProfileService establishmentProfileService;
     private final AuthService authService;
 
     @PostMapping("/register/artist")
@@ -25,8 +29,13 @@ public class AuthController {
         artistProfileService.createArtist(artistProfileDTO);
     }
 
-    @PostMapping("/login/artist")
+    @PostMapping("/login")
     public TokenResponseDTO login(@RequestBody LoginProfileDTO loginProfileDTO) throws Exception {
         return authService.login(loginProfileDTO);
+    }
+
+    @PostMapping("/register/establishment")
+    public void registerEstablishment(@Valid @RequestBody EstablishmentProfileDTO establishmentProfileDTO) throws Exception {
+        establishmentProfileService.createEstablishmentProfile(establishmentProfileDTO);
     }
 }

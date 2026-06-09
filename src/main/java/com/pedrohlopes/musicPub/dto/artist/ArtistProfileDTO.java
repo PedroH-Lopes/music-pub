@@ -26,7 +26,7 @@ public record ArtistProfileDTO(
         @NotBlank(message = "Campo cidade não preenchido")
         String city,
 
-        String instagram,
+        String socialMedia,
 
         @NotNull(message = "Selecione ao menos 1 estilo de musica")
         Set<Long> musicalStylesIds

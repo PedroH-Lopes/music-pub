@@ -11,7 +11,7 @@ public record ArtistProfileUpdateDTO(
 
         String city,
 
-        String instagram,
+        String socialMedia,
 
         Set<Long> musicalStylesIds
 ) {}

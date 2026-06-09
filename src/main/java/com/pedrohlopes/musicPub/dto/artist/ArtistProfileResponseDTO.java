@@ -14,7 +14,7 @@ public record ArtistProfileResponseDTO(
 
         String city,
 
-        String instagram,
+        String socialMedia,
 
         List<String> musicalStyles
 ) {}

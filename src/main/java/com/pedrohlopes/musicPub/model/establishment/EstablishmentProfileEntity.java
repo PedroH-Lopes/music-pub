@@ -14,6 +14,7 @@ import lombok.*;
 public class EstablishmentProfileEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "fantasy_name", nullable = false)
@@ -31,8 +32,10 @@ public class EstablishmentProfileEntity {
     @Column(nullable = false)
     private String contactPhone;
 
+    @Column(nullable = false)
+    private String socialMedia;
+
     @OneToOne
-    @MapsId
     @JoinColumn(name = "user_id")
     private UserEntity user;
 }

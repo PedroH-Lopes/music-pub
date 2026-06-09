@@ -30,7 +30,8 @@ public class ArtistProfileEntity {
     @Column(nullable = false)
     private String city;
 
-    private String instagram;
+    @Column(name = "social_media")
+    private String socialMedia;
 
     @OneToOne
     @JoinColumn(name = "user_id")

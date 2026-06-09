@@ -40,7 +40,7 @@ public class ArtistProfileService {
                 .artisticName(artistProfileDTO.artisticName())
                 .biography(artistProfileDTO.biography())
                 .city(artistProfileDTO.city())
-                .instagram(artistProfileDTO.instagram())
+                .socialMedia(artistProfileDTO.socialMedia())
                 .musicalStyles(styles)
                 .user(user)
                 .build());
@@ -61,13 +61,14 @@ public class ArtistProfileService {
     }
 
     @Transactional
-    public void updateArtist(Long id, ArtistProfileUpdateDTO artistProfileUpdateDTO) {
+    public void updateArtistById(Long id, ArtistProfileUpdateDTO artistProfileUpdateDTO) {
         ArtistProfileEntity artist =  artistProfileRepository
                 .findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Artista não encontrado"));
 
+        UserEntity user = artist.getUser();
+
         if (artistProfileUpdateDTO.name() != null) {
-            UserEntity user = artist.getUser();
             user.setName(artistProfileUpdateDTO.name());
         }
 
@@ -83,8 +84,8 @@ public class ArtistProfileService {
             artist.setCity(artistProfileUpdateDTO.city());
         }
 
-        if (artistProfileUpdateDTO.instagram() != null) {
-            artist.setInstagram(artistProfileUpdateDTO.instagram());
+        if (artistProfileUpdateDTO.socialMedia() != null) {
+            artist.setSocialMedia(artistProfileUpdateDTO.socialMedia());
         }
 
         if (artistProfileUpdateDTO.musicalStylesIds() != null) {
@@ -99,7 +100,7 @@ public class ArtistProfileService {
                         .orElseThrow(() -> new ResourceNotFoundException("Artista não encontrado"));
 
 
-        userService.deleteUser(artistProfileEntity);
+        userService.deleteUserArtist(artistProfileEntity);
     }
 
     private ArtistProfileResponseDTO toDTO(ArtistProfileEntity artistProfileEntity) {
@@ -110,7 +111,7 @@ public class ArtistProfileService {
                 artistProfileEntity.getArtisticName(),
                 artistProfileEntity.getBiography(),
                 artistProfileEntity.getCity(),
-                artistProfileEntity.getInstagram(),
+                artistProfileEntity.getSocialMedia(),
 
                 artistProfileEntity.getMusicalStyles()
                         .stream()

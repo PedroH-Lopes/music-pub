@@ -3,6 +3,7 @@ package com.pedrohlopes.musicPub.model.user;
 import com.pedrohlopes.musicPub.enums.Roles;
 import com.pedrohlopes.musicPub.model.RolesEntity;
 import com.pedrohlopes.musicPub.model.artist.ArtistProfileEntity;
+import com.pedrohlopes.musicPub.model.establishment.EstablishmentProfileEntity;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
@@ -40,6 +41,11 @@ public class UserEntity implements UserDetails {
             cascade = CascadeType.ALL,
             orphanRemoval = true)
     private ArtistProfileEntity artistProfile;
+
+    @OneToOne(mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private EstablishmentProfileEntity establishmentProfile;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles",
