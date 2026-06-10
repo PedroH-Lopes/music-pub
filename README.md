@@ -221,7 +221,6 @@ Representa bares, restaurantes, pubs, casas de show e organizadores de eventos.
 
 * Opportunity
 * Application
-* MusicalStyle
 
 ---
 
@@ -237,7 +236,7 @@ git clone https://github.com/seu-usuario/musicpub.git
 cd musicpub
 ```
 
-## Configurando o Banco de Dados
+## Configurando Banco de Dados e Chave JWT
 
 O arquivo .env example traz todas as variáveis de ambiente que necessitam de configuração:
 
