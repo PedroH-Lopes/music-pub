@@ -113,13 +113,6 @@ O projeto está sendo desenvolvido com foco em boas práticas de backend e arqui
 * Gestão de aprovações
 * Fluxo completo de contratação
 
-
-
-### Documentação
-
-* Swagger/OpenAPI
-* Documentação completa dos endpoints
-
 ---
 
 <h1 id ="tecnologias">💻 Tecnologias</h2>
@@ -278,6 +271,43 @@ mvn spring-boot:run
 ```
 
 ---
+
+<h1 id ="documentacao">📚 Documentação da API</h1>
+
+A API possui documentação interativa gerada com **Swagger / OpenAPI 3**.
+
+Após iniciar a aplicação, acesse:
+
+```bash
+http://localhost:8080/swagger-ui.html
+```
+
+ou
+
+```bash
+http://localhost:8080/swagger-ui/index.html
+```
+
+### Recursos disponíveis:
+
+* Visualização de todos os endpoints
+* Teste direto das requisições (Try it out)
+* Autenticação via JWT (Bearer Token)
+* Esquema de requests e responses
+* Descrição detalhada de cada operação
+
+### Autenticação no Swagger:
+
+Para acessar endpoints protegidos:
+
+* Faça login na rota /v1/auth/login
+* Copie o token JWT
+* Clique em Authorize no Swagger UI
+* Insira:
+
+```bash
+Bearer <seu-token>
+```
 
 <h1 id ="endpoints">📍 Endpoints da API</h2>
 
