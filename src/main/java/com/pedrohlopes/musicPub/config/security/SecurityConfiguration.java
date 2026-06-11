@@ -1,4 +1,4 @@
-package com.pedrohlopes.musicPub.config;
+package com.pedrohlopes.musicPub.config.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -7,6 +7,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -19,6 +20,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 @RequiredArgsConstructor
 public class SecurityConfiguration {
 
@@ -30,13 +32,34 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .exceptionHandling(ex -> ex
+
                         .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
-                        .accessDeniedHandler((request, response, accessDeniedException) -> {
+
+                        .accessDeniedHandler((request,
+                                              response,
+                                              accessDeniedException) -> {
                             response.setStatus(HttpStatus.FORBIDDEN.value());
                         }))
-                .authorizeHttpRequests(auth ->
-                        auth.requestMatchers(HttpMethod.POST, "/v1/auth/**").permitAll()
-                                .anyRequest().authenticated()
+
+                .authorizeHttpRequests(auth -> auth
+
+                        .requestMatchers(HttpMethod.POST, "/v1/auth/**")
+                        .permitAll()
+
+                        .requestMatchers(HttpMethod.GET, "/v1/artist-profile/**", "/v1/establishment-profile/**")
+                        .permitAll()
+
+                        .requestMatchers("/v1/admin/**")
+                        .hasRole("ADMIN")
+
+                        .requestMatchers(HttpMethod.DELETE, "/v1/**")
+                        .hasRole("ADMIN")
+
+                        .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**"
+                        ).permitAll()
+
+                        .anyRequest()
+                        .authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

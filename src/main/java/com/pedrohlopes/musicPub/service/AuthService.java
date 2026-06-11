@@ -1,6 +1,6 @@
 package com.pedrohlopes.musicPub.service;
 
-import com.pedrohlopes.musicPub.config.TokenProvider;
+import com.pedrohlopes.musicPub.config.security.TokenProvider;
 import com.pedrohlopes.musicPub.dto.LoginProfileDTO;
 import com.pedrohlopes.musicPub.dto.TokenResponseDTO;
 import com.pedrohlopes.musicPub.exception.BadRequestException;
@@ -21,16 +21,25 @@ public class AuthService {
     @Value("${JWT_EXPIRATION}")
     private Long expirationTime;
 
-    public TokenResponseDTO login(LoginProfileDTO loginProfileDTO) throws Exception{
+    public TokenResponseDTO login(LoginProfileDTO loginProfileDTO) {
         try {
-            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginProfileDTO.email(), loginProfileDTO.password()));
+
+            Authentication authentication = authenticationManager
+                    .authenticate(
+                            new UsernamePasswordAuthenticationToken(
+                                    loginProfileDTO.email(),
+                                    loginProfileDTO.password()
+                            )
+                    );
+
             String token = tokenProvider.generateToken(authentication);
 
             return new TokenResponseDTO(token, expirationTime);
+
         } catch (BadCredentialsException badCredentialsException) {
+
             throw new BadRequestException("Credenciais Inválidas");
-        } catch (Exception e) {
-            throw e;
+
         }
     }
 }

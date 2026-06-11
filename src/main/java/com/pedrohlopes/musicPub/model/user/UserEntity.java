@@ -1,6 +1,5 @@
 package com.pedrohlopes.musicPub.model.user;
 
-import com.pedrohlopes.musicPub.enums.Roles;
 import com.pedrohlopes.musicPub.model.RolesEntity;
 import com.pedrohlopes.musicPub.model.artist.ArtistProfileEntity;
 import com.pedrohlopes.musicPub.model.establishment.EstablishmentProfileEntity;
@@ -12,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity

@@ -1,6 +1,7 @@
-package com.pedrohlopes.musicPub.config;
+package com.pedrohlopes.musicPub.config.security;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,15 +23,17 @@ public class TokenProvider {
 
     public String generateToken(Authentication authentication) {
         UserDetails user = (UserDetails) authentication.getPrincipal();
-        return buildToken(user.getUsername());
+        assert user != null;
+        return buildToken(user);
     }
 
-    private String buildToken(String username) {
+    private String buildToken(UserDetails user) {
         Date now = new Date();
         Date expiration = new Date(now.getTime() + expirationTime);
 
         return Jwts.builder()
-                .subject(username)
+                .subject(user.getUsername())
+                .claim("roles", user.getAuthorities())
                 .issuedAt(now)
                 .expiration(expiration)
                 .signWith(getSigningKey())
@@ -45,7 +48,7 @@ public class TokenProvider {
         try {
             getClaims(token);
             return true;
-        } catch (Exception e) {
+        } catch (JwtException | IllegalArgumentException e) {
             return false;
         }
     }
