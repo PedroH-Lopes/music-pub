@@ -10,6 +10,7 @@
   <a href="#arquitetura">Arquitetura</a> •
   <a href="#estrutura">Estrutura do Projeto</a> •
   <a href="#execucao">Execução</a> •
+  <a href="#documentacao">Documentação</a> •
   <a href="#endpoints">Endpoints</a> •
   <a href="#roadmap">Roadmap</a>
 </p>
