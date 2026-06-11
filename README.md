@@ -398,7 +398,6 @@ Também são utilizadas regras de autorização baseadas em:
 * [ ] CRUD de oportunidades
 * [ ] Sistema de candidaturas
 * [ ] Estilos musicais
-* [ ] Swagger/OpenAPI
 * [ ] Docker Compose
 * [ ] Flyway
 * [ ] Testes unitários
